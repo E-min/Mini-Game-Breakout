@@ -7,6 +7,13 @@ function checkPlayerCollision(xaxis, yaxis, width, height) {
   const topLocation = yaxis + height / 2;
   const rightLocation = xaxis + width / 2;
   const leftLocation = xaxis - width / 2;
+  if (
+    ball.y + ball.radius >= bottomLocation &&
+    ball.y - ball.radius <= topLocation &&
+    ball.x - ball.radius <= rightLocation &&
+    ball.x + ball.radius >= leftLocation
+  ) {
+  }
   checkObjectBoxCollision(
     bottomLocation,
     rightLocation,

@@ -36,19 +36,6 @@ function playerController() {
     const delta = now - lastFrameTime;
     lastFrameTime = now;
 
-    if (leftPressed) {
-      platform.x -= 0.2 * delta;
-    }
-    if (rightPressed) {
-      platform.x += 0.2 * delta;
-    }
-    if (upPressed) {
-      platform.y -= 0.2 * delta;
-    }
-    if (downPressed) {
-      platform.y += 0.2 * delta;
-    }
-
     const minX = platform.width / 2;
     const maxX = display.width - platform.width / 2;
     const minY = (display.height * 2) / 3 - platform.height / 2;
@@ -61,7 +48,24 @@ function playerController() {
     let distanceX = (rightPressed ? 0.2 : 0) - (leftPressed ? 0.2 : 0);
     let distanceY = (downPressed ? 0.2 : 0) - (upPressed ? 0.2 : 0);
     const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagorean theorem to get total distance
-    platform.velocity = (distance / delta) * 400; // velocity in px/ms
+    const velocity = (distance / delta) * 400; // velocity in px/ms
+    if (leftPressed) {
+      platform.x -= 0.2 * delta;
+      platform.velocity.x = -velocity;
+    }
+    if (rightPressed) {
+      platform.x += 0.2 * delta;
+      platform.velocity.x = velocity;
+    }
+    if (upPressed) {
+      platform.y -= 0.2 * delta;
+      platform.velocity.y = -velocity;
+    }
+    if (downPressed) {
+      platform.y += 0.2 * delta;
+      platform.velocity.y = velocity;
+    }
+    
     // Request the next frame
     requestAnimationFrame(update);
   }

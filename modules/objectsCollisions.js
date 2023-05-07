@@ -1,4 +1,4 @@
-import { ball } from "./objects.js";
+import { ball, platform } from "./objects.js";
 import { gravity } from "./globalVariables.js";
 
 function checkObjectBoxCollision(
@@ -17,6 +17,7 @@ function checkObjectBoxCollision(
       ball.y <= objTopCollision
     ) {
       ball.velocity.y *= -ball.elasticity;
+      ball.velocity.y += platform.velocity.y;
       ball.y = objTopCollision - ball.radius;
     }
     //check if ball will go through bottom to top of the object
@@ -25,8 +26,6 @@ function checkObjectBoxCollision(
         ball.velocity.y *= -ball.elasticity;
         ball.y = objBottomCollision + ball.radius;
       }
-  } else {
-
   }
 }
 export default checkObjectBoxCollision;
