@@ -1,5 +1,15 @@
 import { platform } from "./objects.js";
 
+const buttons = document.getElementsByClassName('button');
+let buttonValues = [];
+
+for (let i = 0; i < buttons.length; i++) {
+  buttonValues.push(Number(buttons[i].value)); // push numerical value of each button into an array
+}
+
+if (buttonValues[0] === 'up') {
+  console.log('up');
+}
 function playerController() {
   let leftPressed = false;
   let rightPressed = false;

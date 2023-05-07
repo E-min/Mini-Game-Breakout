@@ -1,6 +1,6 @@
 export const ball = {
-  x: 150,
-  y: 400,
+  x: 175,
+  y: 430,
   color: "red",
   radius: 10,
   elasticity: 0.8,
@@ -8,7 +8,7 @@ export const ball = {
   airres: 0.0,
 };
 export const platform = {
-  x: 150,
+  x: 175,
   y: 450,
   width: 50,
   height: 10,
