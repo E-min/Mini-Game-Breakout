@@ -48,48 +48,35 @@ function playerController() {
     let distanceX = (rightPressed ? 0.2 : 0) - (leftPressed ? 0.2 : 0);
     let distanceY = (downPressed ? 0.2 : 0) - (upPressed ? 0.2 : 0);
     const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagorean theorem to get total distance
-    const velocity = (distance / delta) * 500; // velocity in px/ms
+    const velocity = (distance / delta) * 300; // velocity in px/ms
     if (leftPressed) {
       platform.x -= 0.2 * delta;
       platform.velocity.x = -velocity;
     } else {
-      upPressed || (platform.velocity.x = 0);
+      platform.velocity <= 0 && (platform.velocity.x = 0);
     }
     if (rightPressed) {
       platform.x += 0.2 * delta;
       platform.velocity.x = velocity;
-    }else {
-      upPressed || (platform.velocity.x = 0);
+    } else {
+      platform.velocity >= 0 && (platform.velocity.x = 0);
     }
     if (upPressed) {
       platform.y -= 0.2 * delta;
       platform.velocity.y = -velocity;
     } else {
-      upPressed || (platform.velocity.y = 0);
+      platform.velocity <= 0 && (platform.velocity.y = 0);
     }
     if (downPressed) {
       platform.y += 0.2 * delta;
       platform.velocity.y = velocity;
     } else {
-      upPressed || (platform.velocity.y = 0);
+      platform.velocity <= 0 && (platform.velocity.y = 0);
     }
-    
     // Request the next frame
     requestAnimationFrame(update);
   }
   // Start the update loop
   requestAnimationFrame(update);
 }
-//export function mouseMovement() {
-//   display.addEventListener("mousemove", function (event) {
-//     // Get the canvas's bounding rectangle
-//     const canvasRect = display.getBoundingClientRect();
-//     // Calculate the mouse's x and y coordinates relative to the canvas
-//     const mouseX = event.clientX - canvasRect.left;
-//     const mouseY = event.clientY - canvasRect.top;
-//     platform.x = mouseX;
-//     platform.y = mouseY;
-//   });
-// }
-
 export default playerController;

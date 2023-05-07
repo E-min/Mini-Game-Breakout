@@ -25,14 +25,12 @@ function gameStart() {
     ball.x += ball.velocity.x;
     ball.y += ball.velocity.y;
     checkEnvironmentOutlineCollision();
-    // mouseMovement();
     checkPlayerCollision(
       platform.x,
       platform.y,
       platform.width,
       platform.height
     );
-    console.log(ball.velocity.y, platform.velocity.y);
     //creating ball
     context.fillStyle = ball.color;
     context.beginPath();
