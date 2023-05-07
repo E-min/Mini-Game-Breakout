@@ -58,15 +58,13 @@ function playerController() {
     platform.x = Math.max(minX, Math.min(maxX, platform.x));
     platform.y = Math.max(minY, Math.min(maxY, platform.y));
 
-    const distanceX = (rightPressed ? 0.2 : 0) - (leftPressed ? 0.2 : 0);
-    const distanceY = (downPressed ? 0.2 : 0) - (upPressed ? 0.2 : 0);
+    let distanceX = (rightPressed ? 0.2 : 0) - (leftPressed ? 0.2 : 0);
+    let distanceY = (downPressed ? 0.2 : 0) - (upPressed ? 0.2 : 0);
     const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagorean theorem to get total distance
-    const velocity = distance / delta; // velocity in px/ms
-
+    platform.velocity = (distance / delta) * 400; // velocity in px/ms
     // Request the next frame
     requestAnimationFrame(update);
   }
-
   // Start the update loop
   requestAnimationFrame(update);
 }
