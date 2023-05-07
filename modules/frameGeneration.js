@@ -32,6 +32,7 @@ function gameStart() {
       platform.width,
       platform.height
     );
+    console.log(ball.velocity.y, platform.velocity.y);
     //creating ball
     context.fillStyle = ball.color;
     context.beginPath();

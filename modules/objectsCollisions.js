@@ -18,6 +18,7 @@ function checkObjectBoxCollision(
     ) {
       ball.velocity.y *= -ball.elasticity;
       ball.velocity.y += platform.velocity.y;
+      ball.velocity.x += platform.velocity.x;
       ball.y = objTopCollision - ball.radius;
     }
     //check if ball will go through bottom to top of the object
@@ -26,7 +27,10 @@ function checkObjectBoxCollision(
         ball.velocity.y *= -ball.elasticity;
         ball.y = objBottomCollision + ball.radius;
       }
+  } else {
+    console.log('1');
   }
+
 }
 export default checkObjectBoxCollision;
 
