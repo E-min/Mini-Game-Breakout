@@ -1,6 +1,19 @@
 import { platform } from "./objects.js";
-// Select all elements with the class "my-element"
+
 const buttons = document.querySelectorAll('.button');
+// removes info after pressing 
+buttons.forEach((button) => {
+  document.addEventListener("keydown", function handleKeyDown(event) {
+    if(event.code === 'ArrowLeft' || event.code === 'ArrowRight' || event.code === 'Arrowup' || event.code === 'ArrowDown'){
+      const infoElement = document.getElementById('info');
+      if (infoElement) {
+        infoElement.remove();
+        document.removeEventListener('keydown', handleKeyDown);
+      }
+    }
+  });
+});
+
 
 // Loop through each element and attach an event listener
 function playerController() {
