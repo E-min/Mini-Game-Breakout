@@ -1,51 +1,91 @@
 import { platform } from "./objects.js";
+// Select all elements with the class "my-element"
+const buttons = document.querySelectorAll('.button');
 
-const buttons = document.getElementsByClassName('button');
-let buttonValues = [];
-
-for (let i = 0; i < buttons.length; i++) {
-  buttonValues.push(Number(buttons[i].value)); // push numerical value of each button into an array
-}
-
-if (buttonValues[0] === 'up') {
-  console.log('up');
-}
+// Loop through each element and attach an event listener
 function playerController() {
-  let leftPressed = false;
-  let rightPressed = false;
-  let upPressed = false;
-  let downPressed = false;
-
+  // Keyboard booleans
+  let leftKeyPressed = false;
+  let rightKeyPressed = false;
+  let upKeyPressed = false;
+  let downKeyPressed = false;
+  // Button booleans 
+  let leftButtonPressed = false;
+  let rightButtonPressed = false;
+  let upButtonPressed = false;
+  let downButtonPressed = false;
+  
+  buttons.forEach((button) => {
+    button.addEventListener('touchstart', (event) => {
+      switch(event.target.value) {
+        case 'up':
+          upButtonPressed = true;
+          break;
+        case 'down':
+          downButtonPressed = true;
+          break;
+        case 'right':
+          rightButtonPressed = true;
+          break;
+        case 'left':
+          leftButtonPressed = true;
+          break;
+      }
+    });
+  });
+  buttons.forEach((button) => {
+    button.addEventListener('touchend', (event) => {
+      switch(event.target.value) {
+        case 'up':
+          upButtonPressed = false;
+          break;
+        case 'down':
+          downButtonPressed = false;
+          break;
+        case 'right':
+          rightButtonPressed = false;
+          break;
+        case 'left':
+          leftButtonPressed = false;
+          break;
+      }
+    });
+  });
   document.addEventListener("keydown", function (event) {
-    if (event.code === "ArrowLeft") {
-      leftPressed = true;
-    } else if (event.code === "ArrowRight") {
-      rightPressed = true;
-    } else if (event.code === "ArrowUp") {
-      upPressed = true;
-    } else if (event.code === "ArrowDown") {
-      downPressed = true;
+    switch (event.code) {
+      case "ArrowLeft":
+        leftKeyPressed = true;
+        break;
+      case "ArrowRight":
+        rightKeyPressed = true;
+        break;
+      case "ArrowUp":
+        upKeyPressed = true;
+        break;
+      case "ArrowDown":
+        downKeyPressed = true;
+        break;
     }
   });
-
   document.addEventListener("keyup", function (event) {
-    if (event.code === "ArrowLeft") {
-      leftPressed = false;
-    } else if (event.code === "ArrowRight") {
-      rightPressed = false;
-    } else if (event.code === "ArrowUp") {
-      upPressed = false;
-    } else if (event.code === "ArrowDown") {
-      downPressed = false;
+    switch (event.code) {
+      case "ArrowLeft":
+        leftKeyPressed = false;
+        break;
+      case "ArrowRight":
+        rightKeyPressed = false;
+        break;
+      case "ArrowUp":
+        upKeyPressed = false;
+        break;
+      case "ArrowDown":
+        downKeyPressed = false;
+        break;
     }
   });
 
   let lastFrameTime = performance.now();
   function update() {
-    const now = performance.now();
-    const delta = now - lastFrameTime;
-    lastFrameTime = now;
-
     const minX = platform.width / 2;
     const maxX = display.width - platform.width / 2;
     const minY = (display.height * 2) / 3 - platform.height / 2;
@@ -54,39 +94,46 @@ function playerController() {
     // Clamp the platform's position to within the canvas bounds
     platform.x = Math.max(minX, Math.min(maxX, platform.x));
     platform.y = Math.max(minY, Math.min(maxY, platform.y));
+    const now = performance.now();
+    const delta = now - lastFrameTime;
+    lastFrameTime = now;
 
-    let distanceX = (rightPressed ? 0.2 : 0) - (leftPressed ? 0.2 : 0);
-    let distanceY = (downPressed ? 0.2 : 0) - (upPressed ? 0.2 : 0);
+    let distanceX = (rightKeyPressed ? 0.2 : 0) - (leftKeyPressed ? 0.2 : 0);
+    let distanceY = (downKeyPressed ? 0.2 : 0) - (upKeyPressed ? 0.2 : 0);
     const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagorean theorem to get total distance
     const velocity = (distance / delta) * 300; // velocity in px/ms
-    if (leftPressed) {
-      platform.x -= 0.2 * delta;
-      platform.velocity.x = -velocity;
-    } else {
-      platform.velocity <= 0 && (platform.velocity.x = 0);
-    }
-    if (rightPressed) {
-      platform.x += 0.2 * delta;
-      platform.velocity.x = velocity;
-    } else {
-      platform.velocity >= 0 && (platform.velocity.x = 0);
-    }
-    if (upPressed) {
-      platform.y -= 0.2 * delta;
-      platform.velocity.y = -velocity;
-    } else {
-      platform.velocity <= 0 && (platform.velocity.y = 0);
-    }
-    if (downPressed) {
-      platform.y += 0.2 * delta;
-      platform.velocity.y = velocity;
-    } else {
-      platform.velocity <= 0 && (platform.velocity.y = 0);
-    }
+    movementController(leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed, velocity, delta); // for arrow keys
+    movementController(leftButtonPressed, rightButtonPressed, upButtonPressed, downButtonPressed, velocity, delta) // for button conttrols
     // Request the next frame
     requestAnimationFrame(update);
   }
   // Start the update loop
   requestAnimationFrame(update);
+}
+const movementController = (left, right, up, down, velocity, delta) => {
+  if (left) {
+    platform.x -= 0.2 * delta;
+    platform.velocity.x = -velocity;
+  } else {
+    platform.velocity <= 0 && (platform.velocity.x = 0);
+  }
+  if (right) {
+    platform.x += 0.2 * delta;
+    platform.velocity.x = velocity;
+  } else {
+    platform.velocity >= 0 && (platform.velocity.x = 0);
+  }
+  if (up) {
+    platform.y -= 0.2 * delta;
+    platform.velocity.y = -velocity;
+  } else {
+    platform.velocity <= 0 && (platform.velocity.y = 0);
+  }
+  if (down) {
+    platform.y += 0.2 * delta;
+    platform.velocity.y = velocity;
+  } else {
+    platform.velocity <= 0 && (platform.velocity.y = 0);
+  }
 }
 export default playerController;
