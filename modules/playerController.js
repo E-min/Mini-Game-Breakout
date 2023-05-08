@@ -109,25 +109,26 @@ const movementController = (left, right, up, down, velocity, delta) => {
     platform.x -= 0.2 * delta;
     platform.velocity.x = -velocity;
   } else {
-    platform.velocity <= 0 && (platform.velocity.x = 0);
+    platform.velocity.x < 0 && (platform.velocity.x = 2);
   }
   if (right) {
     platform.x += 0.2 * delta;
     platform.velocity.x = velocity;
   } else {
-    platform.velocity >= 0 && (platform.velocity.x = 0);
+    platform.velocity.x > 0 && (platform.velocity.x = 0);
   }
   if (up) {
     platform.y -= 0.2 * delta;
     platform.velocity.y = -velocity;
   } else {
-    platform.velocity <= 0 && (platform.velocity.y = 0);
+    platform.velocity.y < 0 && (platform.velocity.y = 0);
   }
   if (down) {
     platform.y += 0.2 * delta;
     platform.velocity.y = velocity;
   } else {
-    platform.velocity <= 0 && (platform.velocity.y = 0);
+    platform.velocity.y > 0 && (platform.velocity.y = 0);
   }
+  console.log(platform.velocity.y);
 }
 export default playerController;

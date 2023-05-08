@@ -3,7 +3,7 @@ export const ball = {
   y: 430,
   color: "red",
   radius: 10,
-  elasticity: 0.8,
+  elasticity: 0.9,
   velocity: { x: 0, y: 0 },
   airres: 0.0,
 };
