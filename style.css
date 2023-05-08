@@ -1,69 +1,75 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(56, 66, 81);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(56, 66, 81);
 }
 .container {
-    position: relative;
-    margin-top: 40px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  margin-top: 40px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .props {
-    display: flex;
-    justify-content: space-evenly;
-    width: 350px;
-    position: absolute;
-    top: -25px;
-    color: white;
-    letter-spacing: 1px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 350px;
+  position: absolute;
+  top: -25px;
+  color: white;
+  letter-spacing: 1px;
 }
 canvas {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 4px inset black;
-    border-radius: 10px;
-    opacity: 0.8;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 4px inset black;
+  border-radius: 10px;
+  opacity: 0.8;
 }
 .buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: -112px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -112px;
 }
-i {
-    font-size: 1.6rem;
+.button i {
+  pointer-events: none;
+  position: absolute;
+  font-size: 2rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
+
 button:nth-child(1) {
-    position: absolute;
-    bottom: 30px;
-    width: 70px;
-    height: 70px;
+  position: absolute;
+  bottom: 30px;
+  width: 70px;
+  height: 70px;
 }
 button:nth-child(2) {
-    position: absolute;
-    right: 90px;
-    width: 70px;
-    height: 70px;
+  position: absolute;
+  right: 90px;
+  width: 70px;
+  height: 70px;
 }
 button:nth-child(3) {
-    position: absolute;
-    left: 90px;
-    width: 70px;
-    height: 70px;
+  position: absolute;
+  left: 90px;
+  width: 70px;
+  height: 70px;
 }
 button:nth-child(4) {
-    position: absolute;
-    top: 30px;
-    width: 70px;
-    height: 70px;
+  position: absolute;
+  top: 30px;
+  width: 70px;
+  height: 70px;
 }
