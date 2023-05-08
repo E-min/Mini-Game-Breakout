@@ -1,6 +1,7 @@
 import { platform } from "./objects.js";
 
 const buttons = document.querySelectorAll(".button");
+
 // removes info after pressing
 buttons.forEach((button) => {
   document.addEventListener("keydown", function handleKeyDown(event) {
@@ -19,9 +20,7 @@ buttons.forEach((button) => {
   });
 });
 
-// Loop through each element and attach an event listener
 function playerController() {
-  // Keyboard booleans
   let leftKeyPressed = false;
   let rightKeyPressed = false;
   let upKeyPressed = false;
@@ -128,6 +127,7 @@ function playerController() {
   // Start the update loop
   requestAnimationFrame(update);
 }
+
 const movementController = (left, right, up, down, velocity, delta) => {
   if (left) {
     platform.x -= 0.2 * delta;

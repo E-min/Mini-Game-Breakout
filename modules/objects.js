@@ -15,6 +15,7 @@ export const platform = {
   color: "black",
   velocity: { x: 0, y: 0 },
 };
+
 // apply elasticity selection values 
 const selectedElasticity = document.getElementById("elasticity");
 selectedElasticity.addEventListener("change", function () {
