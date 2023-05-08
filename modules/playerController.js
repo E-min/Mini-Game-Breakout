@@ -129,6 +129,5 @@ const movementController = (left, right, up, down, velocity, delta) => {
   } else {
     platform.velocity.y > 0 && (platform.velocity.y = 0);
   }
-  console.log(platform.velocity.y);
 }
 export default playerController;

@@ -1,4 +1,4 @@
-export const ball = {
+const ball = {
   x: 175,
   y: 430,
   color: "red",
@@ -7,6 +7,10 @@ export const ball = {
   velocity: { x: 0, y: 0 },
   airres: 0.0,
 };
+const selectedElasticity = document.getElementById("elasticity");
+selectedElasticity.addEventListener("change", function() {
+    ball.elasticity = +selectedElasticity.options[selectedElasticity.selectedIndex].value;
+});
 export const platform = {
   x: 175,
   y: 450,
@@ -15,3 +19,5 @@ export const platform = {
   color: "black",
   velocity: { x: 0, y: 0 }
 };
+
+export {ball};

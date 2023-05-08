@@ -18,6 +18,13 @@ body {
     justify-content: center;
     align-items: center;
 }
+.props {
+    display: flex;
+    justify-content: space-evenly;
+    width: 350px;
+    position: absolute;
+    top: -25px;
+}
 canvas {
     background-color: rgba(255, 255, 255, 0.8);
     border: 4px inset black;

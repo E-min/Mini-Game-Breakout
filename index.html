@@ -15,9 +15,32 @@
     <title>Breakout!</title>
     <body>
       <div class="container">
+        <section class="props">
+          <div class="prop-0">
+            <label for="gravity">Gravity</label>
+            <select name="gravity" id="gravity">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+          <div class="prop-1">
+            <label for="elasticity">Elasticity</label>
+            <select name="elasticity" id="elasticity">
+              <option value="0.1">0.1</option>
+              <option value="0.2">0.2</option>
+              <option value="0.3">0.3</option>
+              <option value="0.4">0.4</option>
+              <option value="0.5">0.5</option>
+              <option value="0.6">0.6</option>
+              <option value="0.7">0.7</option>
+              <option value="0.8" selected>0.8</option>
+              <option value="0.9">0.9</option>
+              <option value="1">1.0</option>
+            </select>
+          </div>
+        </section>
         <canvas id="display" width="350" height="500"></canvas>
         <section class="buttons">
-
           <button class="button" type="button" value="up">
             <i class="fa-solid fa-arrow-up"></i>
           </button>
