@@ -9,26 +9,21 @@ function playerController() {
   let rightKeyPressed = false;
   let upKeyPressed = false;
   let downKeyPressed = false;
-  // Button booleans 
-  let leftButtonPressed = false;
-  let rightButtonPressed = false;
-  let upButtonPressed = false;
-  let downButtonPressed = false;
   
   buttons.forEach((button) => {
     button.addEventListener('touchstart', (event) => {
       switch(event.target.value) {
         case 'up':
-          upButtonPressed = true;
+          upKeyPressed = true;
           break;
         case 'down':
-          downButtonPressed = true;
+          downKeyPressed = true;
           break;
         case 'right':
-          rightButtonPressed = true;
+          rightKeyPressed = true;
           break;
         case 'left':
-          leftButtonPressed = true;
+          leftKeyPressed = true;
           break;
       }
     });
@@ -37,16 +32,16 @@ function playerController() {
     button.addEventListener('touchend', (event) => {
       switch(event.target.value) {
         case 'up':
-          upButtonPressed = false;
+          upKeyPressed = false;
           break;
         case 'down':
-          downButtonPressed = false;
+          downKeyPressed = false;
           break;
         case 'right':
-          rightButtonPressed = false;
+          rightKeyPressed = false;
           break;
         case 'left':
-          leftButtonPressed = false;
+          leftKeyPressed = false;
           break;
       }
     });
@@ -103,7 +98,6 @@ function playerController() {
     const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagorean theorem to get total distance
     const velocity = (distance / delta) * 300; // velocity in px/ms
     movementController(leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed, velocity, delta); // for arrow keys
-    movementController(leftButtonPressed, rightButtonPressed, upButtonPressed, downButtonPressed, velocity, delta) // for button conttrols
     // Request the next frame
     requestAnimationFrame(update);
   }
