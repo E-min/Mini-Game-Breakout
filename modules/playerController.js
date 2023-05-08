@@ -1,19 +1,23 @@
 import { platform } from "./objects.js";
 
-const buttons = document.querySelectorAll('.button');
-// removes info after pressing 
+const buttons = document.querySelectorAll(".button");
+// removes info after pressing
 buttons.forEach((button) => {
   document.addEventListener("keydown", function handleKeyDown(event) {
-    if(event.code === 'ArrowLeft' || event.code === 'ArrowRight' || event.code === 'Arrowup' || event.code === 'ArrowDown'){
-      const infoElement = document.getElementById('info');
+    if (
+      event.code === "ArrowLeft" ||
+      event.code === "ArrowRight" ||
+      event.code === "Arrowup" ||
+      event.code === "ArrowDown"
+    ) {
+      const infoElement = document.getElementById("info");
       if (infoElement) {
         infoElement.remove();
-        document.removeEventListener('keydown', handleKeyDown);
+        document.removeEventListener("keydown", handleKeyDown);
       }
     }
   });
 });
-
 
 // Loop through each element and attach an event listener
 function playerController() {
@@ -22,38 +26,38 @@ function playerController() {
   let rightKeyPressed = false;
   let upKeyPressed = false;
   let downKeyPressed = false;
-  
+
   buttons.forEach((button) => {
-    button.addEventListener('touchstart', (event) => {
-      switch(event.target.value) {
-        case 'up':
+    button.addEventListener("touchstart", (event) => {
+      switch (event.target.value) {
+        case "up":
           upKeyPressed = true;
           break;
-        case 'down':
+        case "down":
           downKeyPressed = true;
           break;
-        case 'right':
+        case "right":
           rightKeyPressed = true;
           break;
-        case 'left':
+        case "left":
           leftKeyPressed = true;
           break;
       }
     });
   });
   buttons.forEach((button) => {
-    button.addEventListener('touchend', (event) => {
-      switch(event.target.value) {
-        case 'up':
+    button.addEventListener("touchend", (event) => {
+      switch (event.target.value) {
+        case "up":
           upKeyPressed = false;
           break;
-        case 'down':
+        case "down":
           downKeyPressed = false;
           break;
-        case 'right':
+        case "right":
           rightKeyPressed = false;
           break;
-        case 'left':
+        case "left":
           leftKeyPressed = false;
           break;
       }
@@ -109,8 +113,15 @@ function playerController() {
     let distanceX = (rightKeyPressed ? 0.2 : 0) - (leftKeyPressed ? 0.2 : 0);
     let distanceY = (downKeyPressed ? 0.2 : 0) - (upKeyPressed ? 0.2 : 0);
     const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagorean theorem to get total distance
-    const velocity = (distance / delta) * 300; // velocity in px/ms
-    movementController(leftKeyPressed, rightKeyPressed, upKeyPressed, downKeyPressed, velocity, delta); // for arrow keys
+    const velocity = (distance / delta) * 420; // velocity in px/ms
+    movementController(
+      leftKeyPressed,
+      rightKeyPressed,
+      upKeyPressed,
+      downKeyPressed,
+      velocity,
+      delta
+    ); // for arrow keys
     // Request the next frame
     requestAnimationFrame(update);
   }
@@ -142,5 +153,5 @@ const movementController = (left, right, up, down, velocity, delta) => {
   } else {
     platform.velocity.y > 0 && (platform.velocity.y = 0);
   }
-}
+};
 export default playerController;

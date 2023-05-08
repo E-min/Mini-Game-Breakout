@@ -49,7 +49,7 @@ canvas {
   transform: translate(-50%, -50%);
 }
 #info {
-  bottom:  -50px;
+  bottom: -50px;
   text-align: center;
   position: absolute;
   color: white;
