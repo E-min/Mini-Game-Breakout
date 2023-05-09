@@ -26,54 +26,5 @@ export function drawObjects() {
   // Draw the rectangle with rounded corners
   context.fillStyle = platform.color;
   context.beginPath();
-  context.moveTo(
-    platform.x - platform.width / 2 + borderRadius,
-    platform.y - platform.height / 2
-  );
-  context.lineTo(
-    platform.x + platform.width / 2 - borderRadius,
-    platform.y - platform.height / 2
-  );
-  context.arcTo(
-    platform.x + platform.width / 2,
-    platform.y - platform.height / 2,
-    platform.x + platform.width / 2,
-    platform.y - platform.height / 2 + borderRadius,
-    borderRadius
-  );
-  context.lineTo(
-    platform.x + platform.width / 2,
-    platform.y + platform.height / 2 - borderRadius
-  );
-  context.arcTo(
-    platform.x + platform.width / 2,
-    platform.y + platform.height / 2,
-    platform.x + platform.width / 2 - borderRadius,
-    platform.y + platform.height / 2,
-    borderRadius
-  );
-  context.lineTo(
-    platform.x - platform.width / 2 + borderRadius,
-    platform.y + platform.height / 2
-  );
-  context.arcTo(
-    platform.x - platform.width / 2,
-    platform.y + platform.height / 2,
-    platform.x - platform.width / 2,
-    platform.y + platform.height / 2 - borderRadius,
-    borderRadius
-  );
-  context.lineTo(
-    platform.x - platform.width / 2,
-    platform.y - platform.height / 2 + borderRadius
-  );
-  context.arcTo(
-    platform.x - platform.width / 2,
-    platform.y - platform.height / 2,
-    platform.x - platform.width / 2 + borderRadius,
-    platform.y - platform.height / 2,
-    borderRadius
-  );
-  context.closePath();
-  context.fill();
+  context.fillRect(platform.x, platform.y, platform.width, platform.height)
 }
