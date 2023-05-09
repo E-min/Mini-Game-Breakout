@@ -1,16 +1,16 @@
 const ball = {
-  x: 130,
-  y: 150,
+  x: 175,
+  y: 350,
   color: "red",
-  radius: 10,
-  elasticity: 0.9,
-  velocity: { x: 0, y: 10 },
+  radius: 7,
+  elasticity: 1,
+  velocity: { x: 0, y:5 },
   airres: 0.0,
 };
 export const platform = {
-  x: 175,
+  x: 155,
   y: 450,
-  width: 40,
+  width: 50,
   height: 10,
   color: "black",
   velocity: { x: 0, y: 0 },
