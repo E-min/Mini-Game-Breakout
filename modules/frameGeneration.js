@@ -41,7 +41,7 @@ function gameStart() {
     lastFrameTime = now;
   }
   // Request the next frame
-  setTimeout(() => requestAnimationFrame(gameStart), 1000 / fps - delta);
+  requestAnimationFrame(gameStart);
 }
 // Start the game Start
 var lastFrameTime = Date.now();
