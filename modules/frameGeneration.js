@@ -1,7 +1,9 @@
 import checkEnvironmentOutlineCollision from "./environmentCollisions.js";
 import checkPlayerCollision from "./playerCollisions.js";
-import { ball, platform } from "./objects.js";
+import { drawObjects } from "./drawObjects.js";
 import { gravity, display, context, fps } from "./globalVariables.js";
+import { ball, platform } from "./objects.js";
+import { score } from "./objectsCollisions.js";
 
 function gameStart() {
   // Calculate the time elapsed since the last frame
@@ -25,26 +27,13 @@ function gameStart() {
     ball.x += ball.velocity.x;
     ball.y += ball.velocity.y;
     checkEnvironmentOutlineCollision();
-    // mouseMovement();
     checkPlayerCollision(
       platform.x,
       platform.y,
       platform.width,
       platform.height
     );
-    //creating ball
-    context.fillStyle = ball.color;
-    context.beginPath();
-    context.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
-    context.fill();
-    // Draw a filled rectangle
-    context.fillStyle = platform.color;
-    context.fillRect(
-      platform.x - platform.width / 2,
-      platform.y - platform.height / 2,
-      platform.width,
-      platform.height
-    );
+    drawObjects();
     // Save the time of this frame
     lastFrameTime = now;
   }

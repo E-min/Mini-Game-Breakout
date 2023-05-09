@@ -7,7 +7,7 @@ function checkEnvironmentOutlineCollision() {
     ball.y = ball.radius;
   }
   // Check bottom collision
-  if (ball.y + ball.radius > display.height - 0.1) {
+  if (ball.y + ball.radius > display.height) {
     ball.velocity.y *= -ball.elasticity;
     // pretend to ball going pass bottom
     ball.y = display.height - ball.radius;
