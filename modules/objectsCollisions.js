@@ -1,6 +1,7 @@
 import { ball, rectangular } from "./objects.js";
 import { gravity} from "./globalVariables.js";
-
+const infoScore = document.getElementById('score');
+let score = 0;
 function checkObjectBoxCollision(object) {
   const bottomLocation = object.y + object.height;
   const topLocation = object.y;
@@ -16,6 +17,8 @@ function checkObjectBoxCollision(object) {
       if (object.type !== 'player') {
         const index = rectangular.indexOf(object);
         rectangular.splice(index, 1);
+        score++;
+        infoScore.innerText = score;
       }
       ball.velocity.y *= -ball.elasticity;
       ball.y = topLocation - ball.radius;
@@ -28,6 +31,8 @@ function checkObjectBoxCollision(object) {
       if (object.type !== 'player') {
         const index = rectangular.indexOf(object);
         rectangular.splice(index, 1);
+        score++;
+        infoScore.innerText = score;
       }
       ball.velocity.y *= -ball.elasticity;
       ball.y = bottomLocation + ball.radius;
@@ -41,6 +46,8 @@ function checkObjectBoxCollision(object) {
       if (object.type !== 'player') {
         const index = rectangular.indexOf(object);
         rectangular.splice(index, 1);
+        score++;
+        infoScore.innerText = score;
       }
       ball.velocity.x *= -ball.elasticity;
       ball.x = rightLocation + ball.radius;
@@ -53,11 +60,13 @@ function checkObjectBoxCollision(object) {
       if (object.type !== 'player') {
         const index = rectangular.indexOf(object);
         rectangular.splice(index, 1);
+        score++;
+        infoScore.innerText = score;
       }
       ball.velocity.x *= -ball.elasticity;
       ball.x = leftLocation - ball.radius;
     }
   }
 }
-
+export {score}
 export default checkObjectBoxCollision;
