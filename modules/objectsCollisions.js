@@ -1,35 +1,63 @@
-import { ball, platform } from "./objects.js";
-import { gravity } from "./globalVariables.js";
+import { ball, rectangular } from "./objects.js";
+import { gravity} from "./globalVariables.js";
 
-function checkObjectBoxCollision(
-  objTopCollision,
-  objRightCollision,
-  objBottomCollision,
-  objLeftCollision,
-  objWidth,
-  objHeight
-) {
+function checkObjectBoxCollision(object) {
+  const bottomLocation = object.y + object.height;
+  const topLocation = object.y;
+  const rightLocation = object.x + object.width;
+  const leftLocation = object.x;
   // on y axis let the ball go through when there is no platform on its way
-  if (ball.x <= objRightCollision && ball.x >= objLeftCollision) {
+  if (ball.x <= rightLocation && ball.x >= leftLocation) {
     //check if ball will go through the object when velocity is higher than height
     if (
-      ball.velocity.y + gravity >= objTopCollision - ball.y - ball.radius &&
-      ball.y <= objTopCollision
+      ball.velocity.y + gravity >= topLocation - ball.y - ball.radius &&
+      ball.y + ball.radius <= topLocation
     ) {
+      if (object.type !== 'player') {
+        const index = rectangular.indexOf(object);
+        rectangular.splice(index, 1);
+      }
       ball.velocity.y *= -ball.elasticity;
-      ball.velocity.y += platform.velocity.y;
-      ball.velocity.x += platform.velocity.x;
-      ball.y = objTopCollision - ball.radius;
+      ball.y = topLocation - ball.radius;
     }
     //check if ball will go through bottom to top of the object
     if (
-      ball.velocity.y - gravity <= objBottomCollision - ball.y + ball.radius &&
-      ball.y >= objBottomCollision
+      ball.velocity.y - gravity <= bottomLocation - ball.y + ball.radius &&
+      ball.y - ball.radius >= bottomLocation
     ) {
+      if (object.type !== 'player') {
+        const index = rectangular.indexOf(object);
+        rectangular.splice(index, 1);
+      }
       ball.velocity.y *= -ball.elasticity;
-      ball.y = objBottomCollision + ball.radius;
+      ball.y = bottomLocation + ball.radius;
     }
-  } else {
+  } else if (ball.y > topLocation && ball.y < bottomLocation) {
+    //right collision
+    if (
+      ball.velocity.x <= rightLocation - ball.x + ball.radius &&
+      ball.x - ball.radius >= rightLocation
+    ) {
+      if (object.type !== 'player') {
+        const index = rectangular.indexOf(object);
+        rectangular.splice(index, 1);
+      }
+      ball.velocity.x *= -ball.elasticity;
+      ball.x = rightLocation + ball.radius;
+    }
+    //left collision
+    if (
+      ball.velocity.x >= leftLocation - ball.x - ball.radius &&
+      ball.x + ball.radius <= leftLocation
+    ) {
+      if (object.type !== 'player') {
+        const index = rectangular.indexOf(object);
+        rectangular.splice(index, 1);
+      }
+      ball.velocity.x *= -ball.elasticity;
+      ball.x = leftLocation - ball.radius;
+    }
   }
 }
+
 export default checkObjectBoxCollision;

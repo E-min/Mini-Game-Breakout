@@ -8,4 +8,4 @@ const selectedGravity = document.getElementById("gravity");
 selectedGravity.addEventListener("change", function () {
   gravity = +selectedGravity.options[selectedGravity.selectedIndex].value;
 });
-export { gravity, fps };
+export { gravity, fps};
