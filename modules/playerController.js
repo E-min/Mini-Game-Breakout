@@ -108,11 +108,7 @@ function playerController() {
     const now = performance.now();
     const delta = now - lastFrameTime;
     lastFrameTime = now;
-
-    let distanceX = (rightKeyPressed ? 0.2 : 0) - (leftKeyPressed ? 0.2 : 0);
-    let distanceY = (downKeyPressed ? 0.2 : 0) - (upKeyPressed ? 0.2 : 0);
-    const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagorean theorem to get total distance
-    const velocity = (distance / delta) * 400; // velocity in px/ms
+    const velocity = 3; // velocity in px/ms
     movementController(
       leftKeyPressed,
       rightKeyPressed,

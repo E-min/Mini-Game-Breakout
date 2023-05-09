@@ -13,13 +13,16 @@ function gameStart() {
   if (delta >= 1000 / fps) {
     // Clear the canvas
     context.clearRect(0, 0, display.width, display.height);
-    //apply air resistance
-    if (ball.velocity.x > 0.1 || ball.velocity.x < -0.1) {
-      ball.velocity.x > 0 && (ball.velocity.x -= ball.airres);
-      ball.velocity.x < 0 && (ball.velocity.x += ball.airres);
-    } else {
-      // needed for stopping the ball in x axis
-      ball.velocity.x = 0;
+    const maxVelocity = 10; // Set a maximum velocity value
+
+    // Calculate the magnitude of the ball's velocity vector
+    const velocityMag = Math.sqrt(ball.velocity.x ** 2 + ball.velocity.y ** 2);
+
+    // If the magnitude exceeds the maximum value, reduce the velocity
+    if (velocityMag > maxVelocity) {
+      const scale = maxVelocity / velocityMag;
+      ball.velocity.x *= scale;
+      ball.velocity.y *= scale;
     }
     //apply gravity
     ball.velocity.y += gravity;
@@ -38,7 +41,7 @@ function gameStart() {
     lastFrameTime = now;
   }
   // Request the next frame
-  requestAnimationFrame(gameStart);
+  setTimeout(() => requestAnimationFrame(gameStart), 1000 / fps - delta);
 }
 // Start the game Start
 var lastFrameTime = Date.now();

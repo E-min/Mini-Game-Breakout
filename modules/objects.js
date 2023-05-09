@@ -1,14 +1,14 @@
 const ball = {
-  x: 130,
-  y: 150,
+  x: 175,
+  y: 350,
   color: "red",
-  radius: 10,
-  elasticity: 0.8,
-  velocity: { x: 0, y: 10 },
+  radius: 7,
+  elasticity: 1,
+  velocity: { x: 0, y:5 },
   airres: 0.0,
 };
 export const platform = {
-  x: 175,
+  x: 155,
   y: 450,
   width: 50,
   height: 10,
@@ -434,12 +434,5 @@ export const rectangular = [
     type: "target",
   },
 ];
-
-// apply elasticity selection values
-const selectedElasticity = document.getElementById("elasticity");
-selectedElasticity.addEventListener("change", function () {
-  ball.elasticity =
-    +selectedElasticity.options[selectedElasticity.selectedIndex].value;
-});
 
 export { ball };
