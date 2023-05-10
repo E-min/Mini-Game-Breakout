@@ -2,7 +2,7 @@ import checkEnvironmentOutlineCollision from "./environmentCollisions.js";
 import checkPlayerCollision from "./playerCollisions.js";
 import { drawObjects } from "./drawObjects.js";
 import { gravity, display, context} from "./globalVariables.js";
-import { ball, platform } from "./objects.js";
+import { ball} from "./objects.js";
 import { fps } from "./environmentCollisions.js";
 
 function gameStart() {
@@ -30,12 +30,7 @@ function gameStart() {
     ball.x += ball.velocity.x;
     ball.y += ball.velocity.y;
     checkEnvironmentOutlineCollision();
-    checkPlayerCollision(
-      platform.x,
-      platform.y,
-      platform.width,
-      platform.height
-    );
+    checkPlayerCollision();
     drawObjects();
     // Save the time of this frame
     lastFrameTime = now;
