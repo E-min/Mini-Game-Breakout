@@ -1,5 +1,5 @@
 import { ball } from "./objects.js";
-export let fps = 30;
+export let fps = 60;
 function checkEnvironmentOutlineCollision() {
   // Check top collision
   if (ball.y - ball.radius <= 0) {
