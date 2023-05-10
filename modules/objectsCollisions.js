@@ -1,4 +1,4 @@
-import { ball, rectangular } from "./objects.js";
+import { ball, platform, rectangular } from "./objects.js";
 import { gravity } from "./globalVariables.js";
 const infoScore = document.getElementById("score");
 let score = 0;
@@ -12,9 +12,14 @@ function handleCollision(object) {
   score++;
   infoScore.innerText = score;
 }
-
 function checkObjectBoxCollision(object) {
   const objectTop = object.y;
+  let combinedVelocityYforNegativeVelocity = ball.velocity.y;
+  let combinedVelocityYforPositiveVelocity = ball.velocity.y;
+  if ( object.type === 'player') {
+    combinedVelocityYforNegativeVelocity - platform.velocity.y;
+    combinedVelocityYforPositiveVelocity + platform.velocity.y;
+  }
   const objectBottom = object.y + object.height;
   const objectLeft = object.x;
   const objectRight = object.x + object.width;
@@ -24,7 +29,7 @@ function checkObjectBoxCollision(object) {
     return;
   }
 
-  if (ball.y > objectBottom + ball.radius || ball.y < objectTop - ball.radius) {
+  if (ball.y > objectBottom + ball.radius || ball.y < objectTop - ball.radius - 50) {
     // No collision on y-axis
     return;
   }
@@ -49,14 +54,14 @@ function checkObjectBoxCollision(object) {
     }
   } else if (ball.y < objectTop) {
     // Top collision
-    if (ball.velocity.y + gravity >= objectTop - ball.y - ball.radius) {
+    if (combinedVelocityYforNegativeVelocity > objectTop - ball.y - ball.radius) {
       ball.velocity.y *= -ball.elasticity;
       ball.y = objectTop - ball.radius;
       handleCollision(object);
     }
   } else if (ball.y > objectBottom) {
     // Bottom collision
-    if (ball.velocity.y - gravity <= objectBottom - ball.y + ball.radius) {
+    if (combinedVelocityYforPositiveVelocity < objectBottom - ball.y + ball.radius) {
       ball.velocity.y *= -ball.elasticity;
       ball.y = objectBottom + ball.radius;
       handleCollision(object);

@@ -3,7 +3,6 @@ import checkPlayerCollision from "./playerCollisions.js";
 import { drawObjects } from "./drawObjects.js";
 import { gravity, display, context, fps } from "./globalVariables.js";
 import { ball, platform } from "./objects.js";
-import { score } from "./objectsCollisions.js";
 
 function gameStart() {
   // Calculate the time elapsed since the last frame
