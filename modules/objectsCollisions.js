@@ -14,12 +14,6 @@ function handleCollision(object) {
 }
 function checkObjectBoxCollision(object) {
   const objectTop = object.y;
-  let combinedVelocityYforNegativeVelocity = ball.velocity.y;
-  let combinedVelocityYforPositiveVelocity = ball.velocity.y;
-  if ( object.type === 'player') {
-    combinedVelocityYforNegativeVelocity - platform.velocity.y;
-    combinedVelocityYforPositiveVelocity + platform.velocity.y;
-  }
   const objectBottom = object.y + object.height;
   const objectLeft = object.x;
   const objectRight = object.x + object.width;
@@ -54,14 +48,14 @@ function checkObjectBoxCollision(object) {
     }
   } else if (ball.y < objectTop) {
     // Top collision
-    if (combinedVelocityYforNegativeVelocity > objectTop - ball.y - ball.radius) {
+    if (ball.velocity.y > objectTop - ball.y - ball.radius) {
       ball.velocity.y *= -ball.elasticity;
       ball.y = objectTop - ball.radius;
       handleCollision(object);
     }
   } else if (ball.y > objectBottom) {
     // Bottom collision
-    if (combinedVelocityYforPositiveVelocity < objectBottom - ball.y + ball.radius) {
+    if (ball.velocity.y < objectBottom - ball.y + ball.radius) {
       ball.velocity.y *= -ball.elasticity;
       ball.y = objectBottom + ball.radius;
       handleCollision(object);

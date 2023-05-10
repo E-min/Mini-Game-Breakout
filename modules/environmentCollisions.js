@@ -1,5 +1,5 @@
 import { ball } from "./objects.js";
-
+export let fps = 30;
 function checkEnvironmentOutlineCollision() {
   // Check top collision
   if (ball.y - ball.radius <= 0) {
@@ -8,9 +8,12 @@ function checkEnvironmentOutlineCollision() {
   }
   // Check bottom collision
   if (ball.y + ball.radius > display.height) {
-    ball.velocity.y *= -ball.elasticity;
-    // pretend to ball going pass bottom
-    ball.y = display.height - ball.radius;
+    setTimeout(() => {
+     ball.x = 175;
+     ball.y = 175;
+     ball.velocity.x = 0;
+     ball.velocity.y = 10;
+    }, 1000)
   }
   // Check right collision
   if (ball.x + ball.radius >= display.width) {

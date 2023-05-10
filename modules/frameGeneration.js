@@ -1,8 +1,9 @@
 import checkEnvironmentOutlineCollision from "./environmentCollisions.js";
 import checkPlayerCollision from "./playerCollisions.js";
 import { drawObjects } from "./drawObjects.js";
-import { gravity, display, context, fps } from "./globalVariables.js";
+import { gravity, display, context} from "./globalVariables.js";
 import { ball, platform } from "./objects.js";
+import { fps } from "./environmentCollisions.js";
 
 function gameStart() {
   // Calculate the time elapsed since the last frame
