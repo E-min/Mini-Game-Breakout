@@ -12,14 +12,14 @@ function checkEnvironmentOutlineCollision() {
   failed.play();
   // Reduce ball velocity to minimize vibration
   ball.velocity.x = 0;
-  ball.velocity.y = 0;
+  ball.velocity.y *= 0.8;
   setTimeout(() => {
     ball.x = 175;
     ball.y = 175;
     setTimeout(() => {
       ball.velocity.y = -platform.velocity.y;
-    }, 1000);
-  }, 1000);
+    }, 1500);
+  }, 500);
 } else if (ball.x + ball.radius >= display.width) {// Check right collision
     ball.velocity.x *= -ball.elasticity;
     ball.x = display.width - ball.radius;
