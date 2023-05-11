@@ -5,6 +5,8 @@ import { display, context} from "./globalVariables.js";
 import { ball, platform} from "./objects.js";
 import { fps } from "./environmentCollisions.js";
 
+// Start the game Start
+let lastFrameTime = Date.now();
 function gameStart() {
   // Calculate the time elapsed since the last frame
   const now = Date.now();
@@ -34,7 +36,5 @@ function gameStart() {
   // Request the next frame
   requestAnimationFrame(gameStart);
 }
-// Start the game Start
-var lastFrameTime = Date.now();
 
 export default gameStart;
