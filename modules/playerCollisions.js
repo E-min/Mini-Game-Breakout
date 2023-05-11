@@ -12,7 +12,6 @@ function checkPlayerCollision() {
   if (ball.y > objectBottom || ball.y < objectTop) {
     return; // exit from function if ball outside of plaftom's y axis
   }
-  ball.y = objectTop;
   ballHit.play();
   ball.velocity.y = platform.velocity.y;
   ball.velocity.x += platform.velocity.x;
