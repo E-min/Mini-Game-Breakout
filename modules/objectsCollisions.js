@@ -1,5 +1,5 @@
 import { ball, rectangular, platform } from "./objects.js";
-import { ballHit, boxHit, won } from "./audio.js";
+import { boxHit, won } from "./audio.js";
 import { fps } from "./environmentCollisions.js";
 
 const infoScore = document.getElementById("score");

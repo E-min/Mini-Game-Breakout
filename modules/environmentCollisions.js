@@ -12,16 +12,14 @@ function checkEnvironmentOutlineCollision() {
   // Check bottom collision
 if (ball.y + ball.radius > display.height) {
   failed.play();
+  // Reduce ball velocity to minimize vibration
   ball.velocity.x = 0;
-
-  // Reduce ball velocity slightly to minimize vibration
   ball.velocity.y = 0;
-
   setTimeout(() => {
     ball.x = 175;
     ball.y = 175;
     setTimeout(() => {
-      ball.velocity.y = 7;
+      ball.velocity.y = -platform.velocity.y;
     }, 1000);
   }, 1000);
 }

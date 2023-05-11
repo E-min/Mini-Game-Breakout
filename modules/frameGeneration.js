@@ -13,7 +13,7 @@ function gameStart() {
   if (delta >= 1000 / fps) {
     // Clear the canvas
     context.clearRect(0, 0, display.width, display.height);
-    const maxVelocity = 10; // Set a maximum velocity value
+    const maxVelocity = 7; // Set a maximum velocity value
     // Calculate the magnitude of the ball's velocity vector
     const velocityMag = Math.sqrt(ball.velocity.x ** 2 + ball.velocity.y ** 2);
     // If the magnitude exceeds the maximum value, reduce the velocity
