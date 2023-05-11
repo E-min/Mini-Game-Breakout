@@ -2,26 +2,19 @@ import { ball, platform } from "./objects.js";
 import { ballHit } from "./audio.js";
 
 function checkPlayerCollision() {
-  const objectTop = platform.y;
-  const objectBottom = platform.y + platform.height;
-  const objectLeft = platform.x;
-  const objectRight = platform.x + platform.width;
-  if (ball.x > objectRight + ball.radius || ball.x < objectLeft - ball.radius) {
+  const objectTop = platform.y - ball.radius;
+  const objectBottom = platform.y + platform.height + ball.radius;
+  const objectLeft = platform.x - ball.radius;
+  const objectRight = platform.x + platform.width + ball.radius;
+  if (ball.x > objectRight || ball.x < objectLeft) {
     return; // exit from function if ball outside of plaftom's x axis
   }
-  if (ball.y > objectBottom + ball.radius || ball.y < objectTop - ball.radius) {
+  if (ball.y > objectBottom || ball.y < objectTop) {
     return; // exit from function if ball outside of plaftom's y axis
   }
-  if (
-    ball.y + ball.radius >= objectTop &&
-    ball.y - ball.radius <= objectBottom &&
-    ball.x - ball.radius <= objectRight &&
-    ball.x + ball.radius >= objectLeft
-  ) {
-    ball.y = objectTop - ball.radius;
-    ballHit.play();
-    ball.velocity.y = platform.velocity.y;
-    ball.velocity.x += platform.velocity.x;
-  }
+  ball.y = objectTop;
+  ballHit.play();
+  ball.velocity.y = platform.velocity.y;
+  ball.velocity.x += platform.velocity.x;
 }
 export default checkPlayerCollision;
