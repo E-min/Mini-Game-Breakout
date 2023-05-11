@@ -1,5 +1,6 @@
 import { ball, rectangular } from "./objects.js";
 import { ballHit, boxHit, won } from "./audio.js";
+import { fps } from "./environmentCollisions.js";
 
 const infoScore = document.getElementById("score");
 let score = 0;
@@ -11,6 +12,7 @@ function handleCollision(object) {
   }
   if(score === 45) {
     won.play();
+    fps = 0;
   }
   const index = rectangular.indexOf(object);
   rectangular.splice(index, 1);

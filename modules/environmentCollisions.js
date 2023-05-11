@@ -10,15 +10,23 @@ function checkEnvironmentOutlineCollision() {
     ballHit.play();
   }
   // Check bottom collision
-  if (ball.y + ball.radius > display.height) {
-    failed.play();
-    ball.velocity.x = 0;
+if (ball.y + ball.radius > display.height) {
+  failed.play();
+  ball.velocity.x = 0;
+
+  // Reduce ball velocity slightly to minimize vibration
+  ball.velocity.y *= 0.8;
+
+  setTimeout(() => {
+    ball.x = 175;
+    ball.y = 175;
+
     setTimeout(() => {
-      ball.x = 175;
-      ball.y = 175;
-      ball.velocity.y = 10;
-    }, 1000)
-  }
+      ball.velocity.y = 7;
+    }, 1000);
+  }, 1000);
+}
+
   // Check right collision
   if (ball.x + ball.radius >= display.width) {
     ball.velocity.x *= -ball.elasticity;
