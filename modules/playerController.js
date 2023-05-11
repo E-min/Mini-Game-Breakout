@@ -80,7 +80,7 @@ function playerController() {
     const now = performance.now();
     const delta = now - lastFrameTime;
     lastFrameTime = now;
-    const velocity = 5; // velocity in px/ms
+    const velocity = 7; // velocity in px/ms
     movementController(
       leftKeyPressed,
       rightKeyPressed,
@@ -99,7 +99,7 @@ const movementController = (left, right, velocity, delta) => {
     platform.x -= 0.2 * delta;
     platform.velocity.x = -velocity;
   } else {
-    platform.velocity.x < 0 && (platform.velocity.x = 2);
+    platform.velocity.x < 0 && (platform.velocity.x = 0);
   }
   if (right) {
     platform.x += 0.2 * delta;

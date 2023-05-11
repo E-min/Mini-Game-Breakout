@@ -1,18 +1,19 @@
-import checkObjectBoxCollision from "./objectsCollisions.js";
-import { ball,platform } from "./objects.js";
+import { ball, platform } from "./objects.js";
+import { ballHit } from "./audio.js";
+
 function checkPlayerCollision() {
   const objectTop = platform.y;
   const objectBottom = platform.y + platform.height;
   const objectLeft = platform.x;
   const objectRight = platform.x + platform.width;
-  checkObjectBoxCollision(platform);
   if (
-    ball.y + ball.radius >= objectTop &&
-    ball.y - ball.radius <= objectBottom &&
-    ball.x - ball.radius <= objectRight &&
-    ball.x + ball.radius >= objectLeft
+    ball.y + ball.radius * 2 >= objectTop &&
+    ball.y - ball.radius * 2 <= objectBottom &&
+    ball.x - ball.radius * 2 <= objectRight &&
+    ball.x + ball.radius * 2 >= objectLeft
   ) {
-    ball.velocity.y += platform.velocity.y;
+    ballHit.play();
+    ball.velocity.y = platform.velocity.y;
     ball.velocity.x += platform.velocity.x;
   }
 }

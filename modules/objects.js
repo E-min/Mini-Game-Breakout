@@ -4,7 +4,7 @@ const ball = {
   color: "red",
   radius: 7,
   elasticity: 1,
-  velocity: { x: 0, y:5 },
+  velocity: { x: 0, y: 7 },
   airres: 0.0,
 };
 export const platform = {

@@ -1,5 +1,5 @@
 import { ballHit, failed } from "./audio.js";
-import { ball } from "./objects.js";
+import { ball, platform } from "./objects.js";
 
 export let fps = 60;
 function checkEnvironmentOutlineCollision() {
@@ -15,7 +15,7 @@ if (ball.y + ball.radius > display.height) {
   ball.velocity.x = 0;
 
   // Reduce ball velocity slightly to minimize vibration
-  ball.velocity.y *= 0.8;
+  ball.velocity.y = 0;
 
   setTimeout(() => {
     ball.x = 175;

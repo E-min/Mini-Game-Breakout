@@ -1,4 +1,4 @@
-import { ball, rectangular } from "./objects.js";
+import { ball, rectangular, platform } from "./objects.js";
 import { ballHit, boxHit, won } from "./audio.js";
 import { fps } from "./environmentCollisions.js";
 
@@ -6,11 +6,7 @@ const infoScore = document.getElementById("score");
 let score = 0;
 
 function handleCollision(object) {
-  if (object.type === "player") {
-    ballHit.play();
-    return;
-  }
-  if(score === 45) {
+  if (score === 45) {
     won.play();
     fps = 0;
   }
@@ -21,43 +17,39 @@ function handleCollision(object) {
   boxHit.play();
 }
 function checkObjectBoxCollision(object) {
-  const objectTop = object.y;
-  const objectBottom = object.y + object.height;
-  const objectLeft = object.x;
-  const objectRight = object.x + object.width;
+  const objectTop = object.y - ball.radius;
+  const objectBottom = object.y + object.height + ball.radius;
+  const objectLeft = object.x + ball.radius;
+  const objectRight = object.x + object.width - ball.radius;
 
   if (ball.x > objectRight + ball.radius || ball.x < objectLeft - ball.radius) {
-    // No collision on x-axis
+    // exit from function if ball outside of plaftom's x axis
     return;
   }
   if (ball.y > objectBottom + ball.radius || ball.y < objectTop - ball.radius) {
-    // No collision on y-axis
+    // exit from function if ball outside of plaftom's y axis
     return;
   }
   if (ball.y >= objectTop && ball.y <= objectBottom) {
     // Ball is within object height
-
     if (ball.x <= objectLeft) {
       // Left collision
-        ball.velocity.x *= -ball.elasticity;
-        ball.x = objectLeft - ball.radius;
-        handleCollision(object);
+      ball.velocity.x = -ball.velocity.x;
+      handleCollision(object);
     } else if (ball.x >= objectRight) {
       // Right collision
-        ball.velocity.x *= -ball.elasticity;
-        ball.x = objectRight + ball.radius;
-        handleCollision(object);
+      ball.velocity.x = -ball.velocity.x;
+
+      handleCollision(object);
     }
   } else if (ball.y <= objectTop) {
     // Top collision
-      ball.velocity.y *= -ball.elasticity;
-      ball.y = objectTop - ball.radius;
-      handleCollision(object);
+    ball.velocity.y = -ball.velocity.y;
+    handleCollision(object);
   } else if (ball.y >= objectBottom) {
     // Bottom collision
-      ball.velocity.y *= -ball.elasticity;
-      ball.y = objectBottom + ball.radius;
-      handleCollision(object);
+    ball.velocity.y = -ball.velocity.y;
+    handleCollision(object);
   }
 }
 
