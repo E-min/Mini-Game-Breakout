@@ -7,9 +7,6 @@ function checkPlayerCollision() {
   const objectLeft = platform.x;
   const objectRight = platform.x + platform.width;
   
-  if(ball.velocity.y >= objectTop - ball.y - ball.radius && ball.x < objectLeft && ball.x > objectRight) {
-    ball.y = objectTop - ball.radius;
-  }
   if (
     ball.y + ball.radius >= objectTop &&
     ball.y - ball.radius <= objectBottom &&
