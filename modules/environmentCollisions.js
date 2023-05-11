@@ -8,9 +8,7 @@ function checkEnvironmentOutlineCollision() {
     ball.velocity.y *= -ball.elasticity;
     ball.y = ball.radius;
     ballHit.play();
-  }
-  // Check bottom collision
-if (ball.y + ball.radius > display.height) {
+  } else if (ball.y + ball.radius > display.height) { // Check bottom collision
   failed.play();
   // Reduce ball velocity to minimize vibration
   ball.velocity.x = 0;
@@ -22,16 +20,11 @@ if (ball.y + ball.radius > display.height) {
       ball.velocity.y = -platform.velocity.y;
     }, 1000);
   }, 1000);
-}
-
-  // Check right collision
-  if (ball.x + ball.radius >= display.width) {
+} else if (ball.x + ball.radius >= display.width) {// Check right collision
     ball.velocity.x *= -ball.elasticity;
     ball.x = display.width - ball.radius;
     ballHit.play();
-  }
-  // Check left collision
-  if (ball.x - ball.radius <= 0) {
+  } else if (ball.x - ball.radius <= 0) { // Check left collision
     ball.velocity.x *= -ball.elasticity;
     ball.x = 0 + ball.radius;
     ballHit.play();

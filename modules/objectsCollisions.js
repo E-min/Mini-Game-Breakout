@@ -1,4 +1,4 @@
-import { ball, rectangular, platform } from "./objects.js";
+import { ball, rectangular } from "./objects.js";
 import { boxHit, won } from "./audio.js";
 import { fps } from "./environmentCollisions.js";
 
@@ -23,12 +23,10 @@ function checkObjectBoxCollision(object) {
   const objectRight = object.x + object.width - ball.radius;
 
   if (ball.x > objectRight + ball.radius || ball.x < objectLeft - ball.radius) {
-    // exit from function if ball outside of plaftom's x axis
-    return;
+    return; // exit from function if ball outside of plaftom's x axis
   }
   if (ball.y > objectBottom + ball.radius || ball.y < objectTop - ball.radius) {
-    // exit from function if ball outside of plaftom's y axis
-    return;
+    return; // exit from function if ball outside of plaftom's y axis
   }
   if (ball.y >= objectTop && ball.y <= objectBottom) {
     // Ball is within object height
@@ -39,7 +37,6 @@ function checkObjectBoxCollision(object) {
     } else if (ball.x >= objectRight) {
       // Right collision
       ball.velocity.x = -ball.velocity.x;
-
       handleCollision(object);
     }
   } else if (ball.y <= objectTop) {
