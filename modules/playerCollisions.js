@@ -18,6 +18,7 @@ function checkPlayerCollision() {
     ball.x - ball.radius <= objectRight &&
     ball.x + ball.radius >= objectLeft
   ) {
+    ball.y = objectTop - ball.radius
     ballHit.play();
     ball.velocity.y = platform.velocity.y;
     ball.velocity.x += platform.velocity.x;
