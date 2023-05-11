@@ -32,7 +32,6 @@ canvas {
   background-color: rgba(255, 255, 255, 0.8);
   border: 4px inset black;
   border-radius: 10px;
-  opacity: 0.8;
 }
 .buttons {
   display: flex;
@@ -68,4 +67,10 @@ button:nth-child(2) {
   left: 90px;
   width: 70px;
   height: 70px;
+}
+
+@media (max-width: 360px) {
+  body {
+   transform: scale(0.8);
+  }
 }
