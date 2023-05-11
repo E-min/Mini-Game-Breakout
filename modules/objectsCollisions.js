@@ -19,8 +19,8 @@ function handleCollision(object) {
 function checkObjectBoxCollision(object) {
   const objectTop = object.y - ball.radius;
   const objectBottom = object.y + object.height + ball.radius;
-  const objectLeft = object.x + ball.radius;
-  const objectRight = object.x + object.width - ball.radius;
+  const objectLeft = object.x - ball.radius;
+  const objectRight = object.x + object.width + ball.radius;
 
   if (ball.x > objectRight + ball.radius || ball.x < objectLeft - ball.radius) {
     return; // exit from function if ball outside of plaftom's x axis
