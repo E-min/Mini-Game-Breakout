@@ -3,12 +3,13 @@
   margin: 0;
   box-sizing: border-box;
 }
-
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: rgb(56, 66, 81);
+  width: 100vw;
+  height: 100vh;
 }
 .container {
   position: relative;
@@ -30,8 +31,9 @@ body {
 }
 canvas {
   background-color: rgba(255, 255, 255, 0.8);
-  border: 4px inset black;
+  border: 5px inset black;
   border-radius: 10px;
+  box-shadow: 0 0 20px 1px grey;
 }
 .buttons {
   display: flex;
@@ -56,21 +58,22 @@ canvas {
   letter-spacing: 1px;
   font-size: 1.2rem;
 }
-button:nth-child(1) {
+.buttons button {
   position: absolute;
-  right: 90px;
+  border: 5px outset grey;
+  border-radius: 5px;
   width: 70px;
   height: 70px;
 }
+button:nth-child(1) {
+  right: 90px;
+}
 button:nth-child(2) {
-  position: absolute;
   left: 90px;
-  width: 70px;
-  height: 70px;
 }
 
 @media (max-width: 360px) {
   body {
-   transform: scale(0.8);
+    transform: scale(0.8);
   }
 }

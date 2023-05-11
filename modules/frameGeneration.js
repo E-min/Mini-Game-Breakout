@@ -2,7 +2,7 @@ import checkEnvironmentOutlineCollision from "./environmentCollisions.js";
 import checkPlayerCollision from "./playerCollisions.js";
 import { drawObjects } from "./drawObjects.js";
 import { gravity, display, context} from "./globalVariables.js";
-import { ball} from "./objects.js";
+import { ball, platform} from "./objects.js";
 import { fps } from "./environmentCollisions.js";
 
 function gameStart() {
@@ -13,7 +13,7 @@ function gameStart() {
   if (delta >= 1000 / fps) {
     // Clear the canvas
     context.clearRect(0, 0, display.width, display.height);
-    const maxVelocity = 7; // Set a maximum velocity value
+    const maxVelocity = -platform.velocity.y; // Set a maximum velocity value
     // Calculate the magnitude of the ball's velocity vector
     const velocityMag = Math.sqrt(ball.velocity.x ** 2 + ball.velocity.y ** 2);
     // If the magnitude exceeds the maximum value, reduce the velocity

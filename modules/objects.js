@@ -13,7 +13,7 @@ export const platform = {
   width: 50,
   height: 10,
   color: "black",
-  velocity: { x: 0, y: -6 },
+  velocity: { x: 0, y: -7 },
   type: "player",
 };
 export const rectangular = [

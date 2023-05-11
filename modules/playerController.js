@@ -80,7 +80,7 @@ function playerController() {
     const now = performance.now();
     const delta = now - lastFrameTime;
     lastFrameTime = now;
-    const velocity = 7; // velocity in px/ms
+    const velocity = -platform.velocity.y; 
     movementController(
       leftKeyPressed,
       rightKeyPressed,
