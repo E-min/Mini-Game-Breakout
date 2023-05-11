@@ -20,7 +20,6 @@ if (ball.y + ball.radius > display.height) {
   setTimeout(() => {
     ball.x = 175;
     ball.y = 175;
-
     setTimeout(() => {
       ball.velocity.y = 7;
     }, 1000);

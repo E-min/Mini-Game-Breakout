@@ -30,12 +30,10 @@ function checkObjectBoxCollision(object) {
     // No collision on x-axis
     return;
   }
-
   if (ball.y > objectBottom + ball.radius || ball.y < objectTop - ball.radius) {
     // No collision on y-axis
     return;
   }
-
   if (ball.y >= objectTop && ball.y <= objectBottom) {
     // Ball is within object height
 
