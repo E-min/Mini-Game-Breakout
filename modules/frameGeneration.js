@@ -1,7 +1,7 @@
 import checkEnvironmentOutlineCollision from "./environmentCollisions.js";
 import checkPlayerCollision from "./playerCollisions.js";
 import { drawObjects } from "./drawObjects.js";
-import { gravity, display, context} from "./globalVariables.js";
+import { display, context} from "./globalVariables.js";
 import { ball, platform} from "./objects.js";
 import { fps } from "./environmentCollisions.js";
 
@@ -22,8 +22,6 @@ function gameStart() {
       ball.velocity.x *= scale;
       ball.velocity.y *= scale;
     }
-    //apply gravity
-    ball.velocity.y += gravity;
     ///updating movement
     ball.x += ball.velocity.x;
     ball.y += ball.velocity.y;
