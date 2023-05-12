@@ -1,14 +1,15 @@
 import { ball, rectangular } from "./objects.js";
 import { boxHit, won } from "./audio.js";
-import { infoScore } from "./globalVariables.js";
+import { context, infoScore } from "./globalVariables.js";
 
 let score = 0;
 let fps = 60;
 
 function handleCollision(object) {
+  // clear rectangular when it gets hit
+  context.clearRect(object.x, object.y, object.width, object.height);
   boxHit.play();
   score++;
-  console.log(score);
   const index = rectangular.indexOf(object);
   rectangular.splice(index, 1);
   infoScore.innerText = score;
