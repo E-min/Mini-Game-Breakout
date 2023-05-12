@@ -2,20 +2,21 @@ import { ball, rectangular } from "./objects.js";
 import { boxHit, won } from "./audio.js";
 import { infoScore } from "./globalVariables.js";
 
-let score = 0;
+let score = 40;
 let fps = 60;
 
 function handleCollision(object) {
   boxHit.play();
   score++;
-  if (score === 45) {
+  console.log(score);
+  const index = rectangular.indexOf(object);
+  rectangular.splice(index, 1);
+  infoScore.innerText = score;
+  if (score === 46) {
     won.play();
     fps = 0;
     return;
   }
-  const index = rectangular.indexOf(object);
-  rectangular.splice(index, 1);
-  infoScore.innerText = score;
 }
 function checkObjectBoxCollision(object) {
   const objectTop = object.y - ball.radius;
