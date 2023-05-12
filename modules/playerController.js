@@ -1,14 +1,13 @@
 import { platform } from "./objects.js";
+import { fps } from "./objectsCollisions.js";
+import { frameRate, miliseconds } from "./globalVariables.js";
 
 const buttons = document.querySelectorAll(".button");
 
 // removes info after pressing
 buttons.forEach((button) => {
   document.addEventListener("keydown", function handleKeyDown(event) {
-    if (
-      event.code === "ArrowLeft" ||
-      event.code === "ArrowRight" 
-    ) {
+    if (event.code === "ArrowLeft" || event.code === "ArrowRight") {
       const infoElement = document.getElementById("info");
       if (infoElement) {
         infoElement.remove();
@@ -18,10 +17,13 @@ buttons.forEach((button) => {
   });
 });
 
-function playerController() {
-  let leftKeyPressed = false;
-  let rightKeyPressed = false;
+let leftKeyPressed = false;
+let rightKeyPressed = false;
+let lastFrameTime = miliseconds;
 
+function keyPress() {
+//******************************************
+// event listener for on secreen buttons
   buttons.forEach((button) => {
     button.addEventListener("touchstart", (event) => {
       switch (event.target.value) {
@@ -33,8 +35,6 @@ function playerController() {
           break;
       }
     });
-  });
-  buttons.forEach((button) => {
     button.addEventListener("touchend", (event) => {
       switch (event.target.value) {
         case "right":
@@ -46,6 +46,8 @@ function playerController() {
       }
     });
   });
+  //******************************************
+  // event listener for keyboard keys 
   document.addEventListener("keydown", function (event) {
     switch (event.code) {
       case "ArrowLeft":
@@ -66,32 +68,6 @@ function playerController() {
         break;
     }
   });
-
-  let lastFrameTime = performance.now();
-  function update() {
-    const minX = 0;
-    const maxX = display.width - platform.width;
-    const minY = (display.height * 2) / 3 - platform.height;
-    const maxY = display.height - platform.height;
-
-    // Clamp the platform's position to within the canvas bounds
-    platform.x = Math.max(minX, Math.min(maxX, platform.x));
-    platform.y = Math.max(minY, Math.min(maxY, platform.y));
-    const now = performance.now();
-    const delta = now - lastFrameTime;
-    lastFrameTime = now;
-    const velocity = -platform.velocity.y; 
-    movementController(
-      leftKeyPressed,
-      rightKeyPressed,
-      velocity,
-      delta
-    ); // for arrow keys
-    // Request the next frame
-    requestAnimationFrame(update);
-  }
-  // Start the update loop
-  requestAnimationFrame(update);
 }
 
 const movementController = (left, right, velocity, delta) => {
@@ -108,4 +84,28 @@ const movementController = (left, right, velocity, delta) => {
     platform.velocity.x > 0 && (platform.velocity.x = 0);
   }
 };
+
+function playerController() {
+  // Calculate the time elapsed since the last frame
+  const now = Date.now();
+  const delta = now - lastFrameTime;
+  // Limit the frame rate to the desired FPS
+  if (delta >= 1000 / frameRate) {
+    const minX = 0;
+    const maxX = display.width - platform.width;
+    const minY = (display.height * 2) / 3 - platform.height;
+    const maxY = display.height - platform.height;
+    // Clamp the platform's position to within the canvas bounds
+    platform.x = Math.max(minX, Math.min(maxX, platform.x));
+    platform.y = Math.max(minY, Math.min(maxY, platform.y));
+    keyPress();
+    const velocity = -platform.velocity.y;
+    movementController(leftKeyPressed, rightKeyPressed, velocity, delta); // for arrow keys
+    // Save the time of this frame
+    lastFrameTime = now;
+  }
+  // Request the next frame
+  requestAnimationFrame(playerController);
+}
+
 export default playerController;
