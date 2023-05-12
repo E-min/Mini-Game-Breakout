@@ -3,7 +3,7 @@ import checkPlayerCollision from "./playerCollisions.js";
 import { drawObjects } from "./drawObjects.js";
 import { display, context} from "./globalVariables.js";
 import { ball, platform} from "./objects.js";
-import { fps } from "./environmentCollisions.js";
+import { fps } from "./objectsCollisions.js";
 
 // Start the game Start
 let lastFrameTime = Date.now();

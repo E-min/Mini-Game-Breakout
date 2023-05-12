@@ -1,13 +1,12 @@
 import { ballHit, failed } from "./audio.js";
 import { ball, platform } from "./objects.js";
 
-export let fps = 60;
 function checkEnvironmentOutlineCollision() {
   // Check top collision
   if (ball.y - ball.radius <= 0) {
-    ball.velocity.y *= -ball.elasticity;
-    ball.y = ball.radius;
     ballHit.play();
+    ball.y = ball.radius;
+    ball.velocity.y *= -ball.elasticity;
   } else if (ball.y + ball.radius > display.height) { // Check bottom collision
   failed.play();
   // Reduce ball velocity to minimize vibration
@@ -21,13 +20,13 @@ function checkEnvironmentOutlineCollision() {
     }, 1500);
   }, 500);
 } else if (ball.x + ball.radius >= display.width) {// Check right collision
+  ballHit.play();
+  ball.x = display.width - ball.radius;
     ball.velocity.x *= -ball.elasticity;
-    ball.x = display.width - ball.radius;
-    ballHit.play();
   } else if (ball.x - ball.radius <= 0) { // Check left collision
-    ball.velocity.x *= -ball.elasticity;
-    ball.x = 0 + ball.radius;
     ballHit.play();
+    ball.x = 0 + ball.radius;
+    ball.velocity.x *= -ball.elasticity;
   }
 }
 export default checkEnvironmentOutlineCollision;
