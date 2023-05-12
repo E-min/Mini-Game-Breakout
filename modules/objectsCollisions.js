@@ -2,7 +2,7 @@ import { ball, rectangular } from "./objects.js";
 import { boxHit, won } from "./audio.js";
 import { infoScore } from "./globalVariables.js";
 
-let score = 40;
+let score = 0;
 let fps = 60;
 
 function handleCollision(object) {
