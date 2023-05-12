@@ -9,12 +9,10 @@ export function drawObjects() {
   context.beginPath();
   context.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
   context.fill();
-  //****************************************
-  // draw target boxes
+   //****************************************
+  // draw target boxes collision
   rectangular.forEach((object) => {
     checkObjectBoxCollision(object);
-    context.fillStyle = object.color;
-    context.fillRect(object.x, object.y, object.width, object.height);
   });
   // ***************************************
   // Draw the rectangle with rounded corners
