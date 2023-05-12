@@ -22,8 +22,8 @@ let rightKeyPressed = false;
 let lastFrameTime = miliseconds;
 
 function keyPress() {
-//******************************************
-// event listener for on secreen buttons
+  //******************************************
+  // event listener for on secreen buttons
   buttons.forEach((button) => {
     button.addEventListener("touchstart", (event) => {
       switch (event.target.value) {
@@ -47,7 +47,7 @@ function keyPress() {
     });
   });
   //******************************************
-  // event listener for keyboard keys 
+  // event listener for keyboard keys
   document.addEventListener("keydown", function (event) {
     switch (event.code) {
       case "ArrowLeft":
