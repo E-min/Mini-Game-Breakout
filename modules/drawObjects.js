@@ -9,7 +9,6 @@ export function drawObjects() {
   context.beginPath();
   context.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
   context.fill();
-  const borderRadius = 5; // Set the border radius to 10 pixels
   //****************************************
   // draw target boxes
   rectangular.forEach((object) => {
