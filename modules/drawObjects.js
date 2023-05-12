@@ -13,15 +13,10 @@ export function drawObjects() {
   //****************************************
   // draw target boxes
   rectangular.forEach((object) => {
-    const bottomLocation = object.y + object.height;
-    const topLocation = object.y;
-    const rightLocation = object.x + object.width;
-    const leftLocation = object.x;
     checkObjectBoxCollision(object);
     context.fillStyle = object.color;
     context.fillRect(object.x, object.y, object.width, object.height);
   });
-
   // ***************************************
   // Draw the rectangle with rounded corners
   context.fillStyle = platform.color;

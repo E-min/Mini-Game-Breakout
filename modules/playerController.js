@@ -7,9 +7,7 @@ buttons.forEach((button) => {
   document.addEventListener("keydown", function handleKeyDown(event) {
     if (
       event.code === "ArrowLeft" ||
-      event.code === "ArrowRight" ||
-      event.code === "Arrowup" ||
-      event.code === "ArrowDown"
+      event.code === "ArrowRight" 
     ) {
       const infoElement = document.getElementById("info");
       if (infoElement) {
@@ -23,18 +21,10 @@ buttons.forEach((button) => {
 function playerController() {
   let leftKeyPressed = false;
   let rightKeyPressed = false;
-  let upKeyPressed = false;
-  let downKeyPressed = false;
 
   buttons.forEach((button) => {
     button.addEventListener("touchstart", (event) => {
       switch (event.target.value) {
-        case "up":
-          upKeyPressed = true;
-          break;
-        case "down":
-          downKeyPressed = true;
-          break;
         case "right":
           rightKeyPressed = true;
           break;
@@ -47,12 +37,6 @@ function playerController() {
   buttons.forEach((button) => {
     button.addEventListener("touchend", (event) => {
       switch (event.target.value) {
-        case "up":
-          upKeyPressed = false;
-          break;
-        case "down":
-          downKeyPressed = false;
-          break;
         case "right":
           rightKeyPressed = false;
           break;
@@ -70,12 +54,6 @@ function playerController() {
       case "ArrowRight":
         rightKeyPressed = true;
         break;
-      case "ArrowUp":
-        upKeyPressed = true;
-        break;
-      case "ArrowDown":
-        downKeyPressed = true;
-        break;
     }
   });
   document.addEventListener("keyup", function (event) {
@@ -86,21 +64,15 @@ function playerController() {
       case "ArrowRight":
         rightKeyPressed = false;
         break;
-      case "ArrowUp":
-        upKeyPressed = false;
-        break;
-      case "ArrowDown":
-        downKeyPressed = false;
-        break;
     }
   });
 
   let lastFrameTime = performance.now();
   function update() {
-    const minX = platform.width / 2;
-    const maxX = display.width - platform.width / 2;
-    const minY = (display.height * 2) / 3 - platform.height / 2;
-    const maxY = display.height - platform.height / 2;
+    const minX = 0;
+    const maxX = display.width - platform.width;
+    const minY = (display.height * 2) / 3 - platform.height;
+    const maxY = display.height - platform.height;
 
     // Clamp the platform's position to within the canvas bounds
     platform.x = Math.max(minX, Math.min(maxX, platform.x));
@@ -108,12 +80,10 @@ function playerController() {
     const now = performance.now();
     const delta = now - lastFrameTime;
     lastFrameTime = now;
-    const velocity = 3; // velocity in px/ms
+    const velocity = -platform.velocity.y; 
     movementController(
       leftKeyPressed,
       rightKeyPressed,
-      upKeyPressed,
-      downKeyPressed,
       velocity,
       delta
     ); // for arrow keys
@@ -124,30 +94,18 @@ function playerController() {
   requestAnimationFrame(update);
 }
 
-const movementController = (left, right, up, down, velocity, delta) => {
+const movementController = (left, right, velocity, delta) => {
   if (left) {
     platform.x -= 0.2 * delta;
     platform.velocity.x = -velocity;
   } else {
-    platform.velocity.x < 0 && (platform.velocity.x = 2);
+    platform.velocity.x < 0 && (platform.velocity.x = 0);
   }
   if (right) {
     platform.x += 0.2 * delta;
     platform.velocity.x = velocity;
   } else {
     platform.velocity.x > 0 && (platform.velocity.x = 0);
-  }
-  if (up) {
-    platform.y -= 0.2 * delta;
-    platform.velocity.y = -velocity;
-  } else {
-    platform.velocity.y < 0 && (platform.velocity.y = 0);
-  }
-  if (down) {
-    platform.y += 0.2 * delta;
-    platform.velocity.y = velocity;
-  } else {
-    platform.velocity.y > 0 && (platform.velocity.y = 0);
   }
 };
 export default playerController;
