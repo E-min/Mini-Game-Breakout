@@ -1,19 +1,25 @@
 import checkEnvironmentOutlineCollision from "./environmentCollisions.js";
 import checkPlayerCollision from "./playerCollisions.js";
 import { drawObjects } from "./drawObjects.js";
-import { display, context} from "./globalVariables.js";
-import { ball, platform, rectangular} from "./objects.js";
+import { display, context } from "./globalVariables.js";
+import { ball, platform } from "./objects.js";
+import { miliseconds } from "./globalVariables.js";
 import { fps } from "./objectsCollisions.js";
 
-// Start the game Start
-let lastFrameTime = Date.now();
+let lastFrameTime = miliseconds;
+
 function gameStart() {
   // Calculate the time elapsed since the last frame
   const now = Date.now();
   const delta = now - lastFrameTime;
   // Limit the frame rate to the desired FPS
   if (delta >= 1000 / fps) {
-    context.clearRect(ball.x - ball.radius - 1, ball.y - ball.radius - 1, (ball.radius * 2) + 2, (ball.radius * 2)+ 2);
+    context.clearRect(
+      ball.x - ball.radius - 1,
+      ball.y - ball.radius - 1,
+      ball.radius * 2 + 2,
+      ball.radius * 2 + 2
+    );
     context.clearRect(0, platform.y, display.width, platform.height);
     // Clear the canvas
     const maxVelocity = -platform.velocity.y; // Set a maximum velocity value
