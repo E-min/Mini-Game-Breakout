@@ -1,7 +1,8 @@
-import { ballHit, failed } from "./audio.js";
-import { ball, platform } from "./objects.js";
+import { ballHit, boxHit, failed } from "./audio.js";
+import { ball, platform, rectangular } from "./objects.js";
+import { context, frameRate, infoScore } from "./globalVariables.js";
 
-function checkEnvironmentOutlineCollision() {
+export function displayOutlineCollision() {
   // Check top collision
   if (ball.y - ball.radius <= 0) {
     ballHit.play();
@@ -32,4 +33,79 @@ function checkEnvironmentOutlineCollision() {
     ball.velocity.x *= -ball.elasticity;
   }
 }
-export default checkEnvironmentOutlineCollision;
+
+//***************************************************************
+
+export function playerCollision() {
+  const objectTop = platform.y - ball.radius;
+  const objectBottom = platform.y + platform.height + ball.radius;
+  const objectLeft = platform.x - ball.radius;
+  const objectRight = platform.x + platform.width + ball.radius;
+  if (ball.x > objectRight || ball.x < objectLeft) {
+    return; // exit from function if ball outside of plaftom's x axis
+  }
+  if (ball.y > objectBottom || ball.y < objectTop) {
+    return; // exit from function if ball outside of plaftom's y axis
+  }
+  ballHit.play();
+  if (ball.y >= objectTop && ball.x <= objectLeft && ball.x >= objectRight) {
+    ball.y = objectTop;
+  }
+  ball.velocity.y = platform.velocity.y;
+  ball.velocity.x += platform.velocity.x;
+}
+
+//****************************************************************
+
+let score = 0;
+let fps = frameRate;
+
+export function targetBoxCollision(object) {
+  const objectTop = object.y - ball.radius;
+  const objectBottom = object.y + object.height + ball.radius;
+  const objectLeft = object.x - ball.radius;
+  const objectRight = object.x + object.width + ball.radius;
+
+  if (ball.x > objectRight + ball.radius || ball.x < objectLeft - ball.radius) {
+    return; // exit from function if ball outside of plaftom's x axis
+  }
+  if (ball.y > objectBottom + ball.radius || ball.y < objectTop - ball.radius) {
+    return; // exit from function if ball outside of plaftom's y axis
+  }
+  if (ball.y >= objectTop && ball.y <= objectBottom) {
+    // Ball is within object height
+    if (ball.x <= objectLeft) {
+      // Left collision
+      ball.velocity.x = -ball.velocity.x;
+      handleCollision(object);
+    } else if (ball.x >= objectRight) {
+      // Right collision
+      ball.velocity.x = -ball.velocity.x;
+      handleCollision(object);
+    }
+  } else if (ball.y <= objectTop) {
+    // Top collision
+    ball.velocity.y = -ball.velocity.y;
+    handleCollision(object);
+  } else if (ball.y >= objectBottom) {
+    // Bottom collision
+    ball.velocity.y = -ball.velocity.y;
+    handleCollision(object);
+  }
+}
+
+function handleCollision(object) {
+  // clear rectangular when it gets hit
+  context.clearRect(object.x, object.y, object.width, object.height);
+  boxHit.play();
+  const index = rectangular.indexOf(object);
+  rectangular.splice(index, 1);
+  score++;
+  infoScore.innerText = score;
+  if (score === 46) {
+    won.play();
+    fps = 0;
+  }
+}
+
+export { score, fps };

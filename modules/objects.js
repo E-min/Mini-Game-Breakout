@@ -1,4 +1,4 @@
-const ball = {
+export const ball = {
   x: 175,
   y: 350,
   color: "red",
@@ -434,5 +434,3 @@ export const rectangular = [
     type: "target",
   },
 ];
-
-export { ball };

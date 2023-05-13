@@ -1,5 +1,4 @@
 import { platform } from "./objects.js";
-import { fps } from "./objectsCollisions.js";
 import { frameRate, miliseconds } from "./globalVariables.js";
 
 const buttons = document.querySelectorAll(".button");

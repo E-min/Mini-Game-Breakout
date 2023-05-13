@@ -1,6 +1,6 @@
 import { ball, platform, rectangular } from "./objects.js";
 import { context } from "./globalVariables.js";
-import checkObjectBoxCollision from "./objectsCollisions.js";
+import { targetBoxCollision } from "./environmentCollisions.js";
 
 export function drawTargetBoxes() {
   // draw target boxes one time only
@@ -8,7 +8,8 @@ export function drawTargetBoxes() {
     context.fillStyle = object.color;
     context.fillRect(object.x, object.y, object.width, object.height);
   });
-}
+};
+
 export function drawObjects() {
   //****************************************
   //creating ball
@@ -19,11 +20,11 @@ export function drawObjects() {
   //****************************************
   // draw target boxes collision
   rectangular.forEach((object) => {
-    checkObjectBoxCollision(object);
+    targetBoxCollision(object);
   });
   // ***************************************
   // Draw the rectangle with rounded corners
   context.fillStyle = platform.color;
   context.beginPath();
   context.fillRect(platform.x, platform.y, platform.width, platform.height);
-}
+};
