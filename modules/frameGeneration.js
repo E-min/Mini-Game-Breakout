@@ -7,7 +7,7 @@ import { fps } from "./environmentCollisions.js";
 
 let lastFrameTime = miliseconds;
 
-function gameStart() {
+const gameStart = function() {
   // Calculate the time elapsed since the last frame
   const now = Date.now();
   const delta = now - lastFrameTime;

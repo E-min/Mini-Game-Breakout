@@ -19,7 +19,7 @@ buttons.forEach((button) => {
 let leftKeyPressed = false;
 let rightKeyPressed = false;
 
-function keyPress() {
+const keyPress = function() {
   //******************************************
   // event listener for on secreen buttons
   buttons.forEach((button) => {
@@ -85,7 +85,7 @@ const movementController = (left, right, velocity, delta) => {
 
 let lastFrameTime = miliseconds;
 
-function playerController() {
+const playerController = function() {
   // Calculate the time elapsed since the last frame
   const now = Date.now();
   const delta = now - lastFrameTime;

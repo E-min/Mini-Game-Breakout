@@ -2,7 +2,7 @@ import { ballHit, boxHit, failed } from "./audio.js";
 import { ball, platform, rectangular } from "./objects.js";
 import { context, frameRate, infoScore } from "./globalVariables.js";
 
-export function displayOutlineCollision() {
+export const displayOutlineCollision = function() {
   // Check top collision
   if (ball.y - ball.radius <= 0) {
     ballHit.play();
@@ -36,7 +36,7 @@ export function displayOutlineCollision() {
 
 //***************************************************************
 
-export function playerCollision() {
+export const playerCollision = function() {
   const objectTop = platform.y - ball.radius;
   const objectBottom = platform.y + platform.height + ball.radius;
   const objectLeft = platform.x - ball.radius;
@@ -60,7 +60,7 @@ export function playerCollision() {
 let score = 0;
 let fps = frameRate;
 
-export function targetBoxCollision(object) {
+export const targetBoxCollision = function(object) {
   const objectTop = object.y - ball.radius;
   const objectBottom = object.y + object.height + ball.radius;
   const objectLeft = object.x - ball.radius;
@@ -94,7 +94,7 @@ export function targetBoxCollision(object) {
   }
 }
 
-function handleCollision(object) {
+const handleCollision = function(object) {
   // clear rectangular when it gets hit
   context.clearRect(object.x, object.y, object.width, object.height);
   boxHit.play();

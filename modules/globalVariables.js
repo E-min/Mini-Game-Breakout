@@ -4,7 +4,7 @@ export const infoScore = document.getElementById("score");
 export const miliseconds = Date.now();
 export const frameRate = 60;
 
-export function userHaveTouchScreen() {
+export const userHaveTouchScreen = function() {
   const buttonsContainer = document.getElementById("buttons-container");
   const info = document.getElementById("info");
   //check if users have touchscreen
