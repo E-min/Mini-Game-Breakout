@@ -18,7 +18,6 @@ buttons.forEach((button) => {
 
 let leftKeyPressed = false;
 let rightKeyPressed = false;
-let lastFrameTime = miliseconds;
 
 function keyPress() {
   //******************************************
@@ -84,6 +83,8 @@ const movementController = (left, right, velocity, delta) => {
   }
 };
 
+let lastFrameTime = miliseconds;
+
 function playerController() {
   // Calculate the time elapsed since the last frame
   const now = Date.now();
@@ -92,14 +93,11 @@ function playerController() {
   if (delta >= 1000 / frameRate) {
     const minX = 0;
     const maxX = display.width - platform.width;
-    const minY = (display.height * 2) / 3 - platform.height;
-    const maxY = display.height - platform.height;
-    // Clamp the platform's position to within the canvas bounds
+    // limit platfrom movment range
     platform.x = Math.max(minX, Math.min(maxX, platform.x));
-    platform.y = Math.max(minY, Math.min(maxY, platform.y));
     keyPress();
     const velocity = -platform.velocity.y;
-    movementController(leftKeyPressed, rightKeyPressed, velocity, delta); // for arrow keys
+    movementController(leftKeyPressed, rightKeyPressed, velocity, delta);
     // Save the time of this frame
     lastFrameTime = now;
   }
