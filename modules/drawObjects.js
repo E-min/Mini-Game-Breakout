@@ -2,7 +2,7 @@ import { ball, platform, rectangular } from "./objects.js";
 import { context } from "./globalVariables.js";
 import { targetBoxCollision } from "./environmentCollisions.js";
 
-export const drawTargetBoxes = function() {
+export const drawTargetBoxes = function () {
   // draw target boxes one time only
   rectangular.forEach((object) => {
     context.fillStyle = object.color;
@@ -10,7 +10,7 @@ export const drawTargetBoxes = function() {
   });
 };
 
-export const drawObjects = function() {
+export const drawObjects = function () {
   //****************************************
   //creating ball
   context.fillStyle = ball.color;
